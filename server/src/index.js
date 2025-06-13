@@ -18,17 +18,13 @@ io.on('connection', socket => {
 	console.log(`Usuario conectado: ${socket.id} (socket.id: ${socket.id})`);
 	connectedUsers.set(socket.userId, socket.id);
 
-	socket.on('message', data => {
-		console.log(`Message from ${socket.userId}:`, data);
-		socket.broadcast.emit('message', data);
-	});
-
 	socket.on('disconnect', () => {
 		console.log(`Disconnected user: ${socket.id}`);
 		connectedUsers.delete(socket.id);
 	});
 });
 //io es nuestro chat, que tiene eventos predefinidios
+//socket es el "evento" de conexión. la información del cliente que se ha conectado
 
 server.listen(3000, () => {
 	console.log(`Server listening on http://localhost:3000`);
